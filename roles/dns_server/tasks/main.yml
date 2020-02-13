@@ -1,0 +1,20 @@
+---
+- name: Install dnsmasq package
+  package:
+    name: dnsmasq
+    state: latest
+
+- name: Generate dnsmasq config file
+  copy:
+    src: etc/dnsmasq.conf
+    dest: /etc/dnsmasq.conf
+    owner: root
+    group: dnsmasq
+    mode: 0644
+    notify: Restart dnsmasq service
+
+- name: Start and enable dnsmasq service
+  service:
+    name: dnsmasq
+    state: started
+    enabled: true

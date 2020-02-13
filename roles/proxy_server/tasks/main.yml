@@ -1,0 +1,20 @@
+---
+- name: Install squid package
+  package:
+    name: squid
+    state: latest
+
+- name: Generate squid config file
+  copy:
+    src: etc/squid/squid.conf
+    dest: /etc/squid/squid.conf
+    owner: root
+    group: squid
+    mode: 0640
+    notify: Restart squid service
+
+- name: Start and enable squid service
+  service:
+    name: squid
+    state: started
+    enabled: true
