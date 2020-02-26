@@ -1,0 +1,9 @@
+# vim: set ft=ansible
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - debug:
+        var: "hostvars['{{ item }}']"
+      with_inventory_hostnames:
+        - all
